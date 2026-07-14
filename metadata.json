@@ -1,0 +1,6 @@
+{
+  "name": "Interactive Developer Portfolio",
+  "description": "A highly immersive, premium 3D developer portfolio featuring cinematic scroll effects, interactive WebGL particles, glassmorphic UI elements, and modern creative layout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

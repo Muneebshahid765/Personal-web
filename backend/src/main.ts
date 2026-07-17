@@ -3,15 +3,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const port = process.env.BACKEND_PORT || 3001;
+   const port = process.env.PORT || process.env.BACKEND_PORT || 3001;
   const app = await NestFactory.create(AppModule);
   
   // Set global API routing prefix
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('app/api');
   
   // Enable CORS so the React frontend can fetch securely
   app.enableCors({
-    origin: '*',
+    
+    origin:[ 'https://muneebcodes.tech',
+     'https://www.muneebcodes.tech'
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,

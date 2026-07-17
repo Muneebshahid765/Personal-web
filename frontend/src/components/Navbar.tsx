@@ -183,49 +183,63 @@ export default function Navbar({ activePage, onPageChange, isDarkMode, onToggleT
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-35 flex bg-[#070708]/98 backdrop-blur-2xl overflow-y-auto"
+            className={`fixed inset-0 z-35 flex backdrop-blur-2xl overflow-y-auto ${
+              isDarkMode ? 'bg-[#070708]/98' : 'bg-white/98'
+            }`}
           >
             {/* Grid container with spacious layouts */}
             <div className="w-full max-w-7xl mx-auto px-6 py-28 md:py-36 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
               
               {/* Left Details Panel (Lg span 4) */}
-              <div className="lg:col-span-4 flex flex-col justify-between h-full space-y-8 border-b lg:border-b-0 lg:border-r border-[#27272a] pb-8 lg:pb-0 lg:pr-12 text-left">
+              <div className={`lg:col-span-4 flex flex-col justify-between h-full space-y-8 border-b lg:border-b-0 lg:border-r pb-8 lg:pb-0 lg:pr-12 text-left ${
+                isDarkMode ? 'border-[#27272a]' : 'border-neutral-200'
+              }`}>
                 <div>
                   <span className="text-[10px] font-mono tracking-widest text-[#00f2fe] uppercase block mb-2">
                     ● CURRENTLY AVAILABLE
                   </span>
-                  <h3 className="text-xl md:text-2xl font-sans font-bold tracking-tight text-white">
+                  <h3 className={`text-xl md:text-2xl font-sans font-bold tracking-tight ${
+                    isDarkMode ? 'text-white' : 'text-neutral-900'
+                  }`}>
                     Let's collaborate on immersive 3D digital experiences.
                   </h3>
-                  <p className="text-xs text-[#a1a1aa] mt-2 font-mono leading-relaxed">
+                  <p className={`text-xs mt-2 font-mono leading-relaxed ${
+                    isDarkMode ? 'text-[#a1a1aa]' : 'text-neutral-600'
+                  }`}>
                     Developing modern, lightning-fast WebGL interactions and premium design systems for innovative businesses worldwide.
                   </p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="text-xs font-mono text-[#71717a]">
+                  <div className={`text-xs font-mono ${isDarkMode ? 'text-[#71717a]' : 'text-neutral-500'}`}>
                     QUICK CONNECT
                   </div>
                   <a
                     href="mailto:muneebshahid765@gmail.com"
-                    className="group flex items-center justify-between text-sm text-white hover:text-[#00f2fe] border-b border-[#27272a] py-2 transition-colors duration-300"
+                    className={`group flex items-center justify-between text-sm hover:text-[#00f2fe] border-b py-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white border-[#27272a]' : 'text-neutral-900 border-neutral-200'
+                    }`}
                   >
                     <span>muneebshahid765@gmail.com</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#71717a] group-hover:text-[#00f2fe] transition-colors duration-300" />
+                    <ArrowUpRight className={`w-4 h-4 group-hover:text-[#00f2fe] transition-colors duration-300 ${
+                      isDarkMode ? 'text-[#71717a]' : 'text-neutral-400'
+                    }`} />
                   </a>
-                  <div className="flex gap-4 text-xs font-mono text-[#a1a1aa]">
-                    <a href="https://github.com" target="_blank" className="hover:text-white transition-colors duration-300">GITHUB</a>
+                  <div className={`flex gap-4 text-xs font-mono ${isDarkMode ? 'text-[#a1a1aa]' : 'text-neutral-500'}`}>
+                    <a href="https://github.com" target="_blank" className={`transition-colors duration-300 ${isDarkMode ? 'hover:text-white' : 'hover:text-neutral-900'}`}>GITHUB</a>
                     <span>/</span>
-                    <a href="https://linkedin.com" target="_blank" className="hover:text-white transition-colors duration-300">LINKEDIN</a>
+                    <a href="https://linkedin.com" target="_blank" className={`transition-colors duration-300 ${isDarkMode ? 'hover:text-white' : 'hover:text-neutral-900'}`}>LINKEDIN</a>
                     <span>/</span>
-                    <a href="https://twitter.com" target="_blank" className="hover:text-white transition-colors duration-300">TWITTER</a>
+                    <a href="https://twitter.com" target="_blank" className={`transition-colors duration-300 ${isDarkMode ? 'hover:text-white' : 'hover:text-neutral-900'}`}>TWITTER</a>
                   </div>
                 </div>
               </div>
 
               {/* Right Navigation List (Lg span 8) */}
               <div className="lg:col-span-8 flex flex-col justify-center text-left">
-                <span className="text-[10px] font-mono tracking-widest text-[#71717a] uppercase mb-4 block pl-2">
+                <span className={`text-[10px] font-mono tracking-widest uppercase mb-4 block pl-2 ${
+                  isDarkMode ? 'text-[#71717a]' : 'text-neutral-500'
+                }`}>
                   INDEX / PORTFOLIO DIRECTORY
                 </span>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-1">
@@ -238,14 +252,22 @@ export default function Navbar({ activePage, onPageChange, isDarkMode, onToggleT
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: index * 0.05, duration: 0.5, ease: 'easeOut' }}
                         onClick={() => handleNavClick(item.id)}
-                        className={`group flex items-baseline gap-4 py-3.5 border-b border-[#1f1f23] text-left cursor-pointer transition-transform duration-300 hover:translate-x-2`}
+                        className={`group flex items-baseline gap-4 py-3.5 border-b text-left cursor-pointer transition-transform duration-300 hover:translate-x-2 ${
+                          isDarkMode ? 'border-[#1f1f23]' : 'border-neutral-200'
+                        }`}
                       >
-                        <span className="text-[10px] font-mono text-[#71717a] group-hover:text-[#00f2fe] transition-colors duration-300">
+                        <span className={`text-[10px] font-mono group-hover:text-[#00f2fe] transition-colors duration-300 ${
+                          isDarkMode ? 'text-[#71717a]' : 'text-neutral-400'
+                        }`}>
                           {item.index}
                         </span>
-                        <span className={`text-2xl md:text-3.5xl font-sans font-extrabold tracking-tighter ${
-                          isSelected ? 'text-[#00f2fe]' : 'text-[#e4e4e7] group-hover:text-white'
-                        } transition-colors duration-300`}>
+                        <span className={`text-2xl md:text-3.5xl font-sans font-extrabold tracking-tighter transition-colors duration-300 ${
+                          isSelected
+                            ? 'text-[#00f2fe]'
+                            : isDarkMode
+                              ? 'text-[#e4e4e7] group-hover:text-white'
+                              : 'text-neutral-700 group-hover:text-neutral-900'
+                        }`}>
                           {item.label}
                         </span>
                       </motion.button>

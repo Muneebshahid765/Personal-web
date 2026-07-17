@@ -17,7 +17,7 @@ export default function Projects({ selectedProjectId, onSelectProject, isDarkMod
   const { data: projectsList = [] } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: async () => {
-      const res = await fetch('/api/projects');
+      const res = await fetch('https://muneebcodes.tech/app/api/projects');
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }

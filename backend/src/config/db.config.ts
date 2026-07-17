@@ -44,8 +44,8 @@ export async function getDbConnection() {
     console.log('🚀 SUCCESS: Connected to MySQL database via cPanel configuration!');
     return pool;
   } catch (error) {
-    console.error('❌ DATABASE CONNECTION ERROR: Could not connect to cPanel SQL database.', error.message);
-    console.warn('⚠️ Backend will run in FALLBACK MODE using mock data to keep the application live and functional.');
+    console.warn('⚠️ DATABASE CONNECTION INFO: Could not connect to cPanel SQL database.', error.message);
+    console.warn('⚠️ Backend is running in FALLBACK MODE using mock data to keep the application live and functional.');
     pool = null;
     return null;
   }

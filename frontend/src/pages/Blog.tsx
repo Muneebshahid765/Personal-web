@@ -22,7 +22,7 @@ export default function Blog({ isDarkMode, selectedArticleId: propSelectedArticl
   const { data: articlesList = [] } = useQuery<Article[]>({
     queryKey: ['blog'],
     queryFn: async () => {
-      const res = await fetch('/api/blog');
+      const res = await fetch('https://muneebcodes.tech/app/api/blog');
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }

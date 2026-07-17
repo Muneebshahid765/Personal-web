@@ -11,7 +11,7 @@ interface HomeProps {
   onSelectProject: (projectId: string) => void;
   isDarkMode: boolean;
 }
-
+const url = "https://muneebcodes.tech/app/api"
 export default function Home({ onPageChange, onSelectProject, isDarkMode }: HomeProps) {
   // Testimonials state
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -47,7 +47,7 @@ export default function Home({ onPageChange, onSelectProject, isDarkMode }: Home
   const { data: projectsList = [] } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: async () => {
-      const res = await fetch('/api/projects');
+      const res = await fetch(`${url}/projects`);
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }
@@ -56,7 +56,7 @@ export default function Home({ onPageChange, onSelectProject, isDarkMode }: Home
   const { data: articlesList = [] } = useQuery<Article[]>({
     queryKey: ['blog'],
     queryFn: async () => {
-      const res = await fetch('/api/blog');
+      const res = await fetch(`${url}/blog`);
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }

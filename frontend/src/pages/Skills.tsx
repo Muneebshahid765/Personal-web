@@ -13,7 +13,7 @@ export default function Skills({ isDarkMode }: SkillsProps) {
   const { data: skills = [] } = useQuery<Skill[]>({
     queryKey: ['skills'],
     queryFn: async () => {
-      const res = await fetch('/api/skills');
+      const res = await fetch('https://muneebcodes.tech/app/api/skills');
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }

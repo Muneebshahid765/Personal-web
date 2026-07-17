@@ -15,6 +15,8 @@ interface AdminProps {
 
 type AdminTab = 'services' | 'projects' | 'skills' | 'experience' | 'articles' | 'messages';
 
+const url = "https://muneebcodes.tech/app/api"
+
 export default function Admin({ isDarkMode }: AdminProps) {
   const queryClient = useQueryClient();
   const [token, setToken] = useState<string | null>(localStorage.getItem('adminToken'));
@@ -37,7 +39,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   // Verification on mount
   useEffect(() => {
     if (token) {
-      fetch('/api/auth/verify', {
+      fetch(`${url}/auth/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token })
@@ -70,7 +72,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
     setIsLoggingIn(true);
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${url}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -93,7 +95,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: services = [], refetch: refetchServices } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch('/api/services');
+      const res = await fetch(`${url}/services`);
       if (!res.ok) throw new Error('Failed to fetch services');
       const json = await res.json();
       return Array.isArray(json) ? json : [];
@@ -104,7 +106,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: projects = [], refetch: refetchProjects } = useQuery({
     queryKey: ['projects'],
     queryFn: async () => {
-      const res = await fetch('/api/projects');
+      const res = await fetch(`{url/projects`);
       if (!res.ok) throw new Error('Failed to fetch projects');
       const json = await res.json();
       return Array.isArray(json) ? json : [];
@@ -115,7 +117,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: skills = [], refetch: refetchSkills } = useQuery({
     queryKey: ['skills'],
     queryFn: async () => {
-      const res = await fetch('/api/skills');
+      const res = await fetch(`${url}/skills`);
       if (!res.ok) throw new Error('Failed to fetch skills');
       const json = await res.json();
       return Array.isArray(json) ? json : [];
@@ -126,7 +128,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: experiences = [], refetch: refetchExperiences } = useQuery({
     queryKey: ['experiences'],
     queryFn: async () => {
-      const res = await fetch('/api/experiences');
+      const res = await fetch(`${url}/experiences`);
       if (!res.ok) throw new Error('Failed to fetch experiences');
       const json = await res.json();
       return Array.isArray(json) ? json : [];
@@ -137,7 +139,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: articles = [], refetch: refetchArticles } = useQuery({
     queryKey: ['blog'],
     queryFn: async () => {
-      const res = await fetch('/api/blog');
+      const res = await fetch(`${url}/blog`);
       if (!res.ok) throw new Error('Failed to fetch articles');
       const json = await res.json();
       return Array.isArray(json) ? json : [];
@@ -148,7 +150,7 @@ export default function Admin({ isDarkMode }: AdminProps) {
   const { data: messages = [], refetch: refetchMessages } = useQuery({
     queryKey: ['messages'],
     queryFn: async () => {
-      const res = await fetch('/api/contact/messages', {
+      const res = await fetch(`${url}/contact/messages`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to fetch messages');

@@ -8,34 +8,34 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
 
+  const positionRef = useRef({ x: 0, y: 0 });
   const trailRef = useRef({ x: 0, y: 0 });
 
+  // 1. Detect touch/mobile device (runs once)
   useEffect(() => {
-    // 1. Detect touch/mobile device
-    const checkDevice = () => {
-      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      setIsMobile(hasTouch);
-    };
-    checkDevice();
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsMobile(hasTouch);
+  }, []);
 
+  useEffect(() => {
     if (isMobile) return;
 
-    // 2. Track mouse position
+    // 2. Track mouse position (updates a ref, not state, so this effect never restarts)
     const handleMouseMove = (e: MouseEvent) => {
       setIsVisible(true);
-      setPosition({ x: e.clientX, y: e.clientY });
+      positionRef.current = { x: e.clientX, y: e.clientY };
+      setPosition(positionRef.current);
 
-      // Check if hovering over interactive elements
       const target = e.target as HTMLElement | null;
       if (target) {
-        const isClickable = 
-          target.tagName === 'A' || 
-          target.tagName === 'BUTTON' || 
-          target.closest('button') || 
-          target.closest('a') || 
+        const isClickable =
+          target.tagName === 'A' ||
+          target.tagName === 'BUTTON' ||
+          target.closest('button') ||
+          target.closest('a') ||
           target.classList.contains('clickable') ||
           target.getAttribute('role') === 'button';
-        
+
         setIsPointer(!!isClickable);
 
         const isSpecCard = target.closest('.project-card') || target.closest('.blog-card');
@@ -50,12 +50,12 @@ export default function CustomCursor() {
     window.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // 3. Smooth Lerping for cursor trail
+    // 3. Smooth Lerping for cursor trail — single continuous RAF loop
     let animationId: number;
     const updateTrail = () => {
-      const lerpFactor = 0.12; // Lower is smoother/laggier trail
-      trailRef.current.x += (position.x - trailRef.current.x) * lerpFactor;
-      trailRef.current.y += (position.y - trailRef.current.y) * lerpFactor;
+      const lerpFactor = 0.12;
+      trailRef.current.x += (positionRef.current.x - trailRef.current.x) * lerpFactor;
+      trailRef.current.y += (positionRef.current.y - trailRef.current.y) * lerpFactor;
       setTrail({ x: trailRef.current.x, y: trailRef.current.y });
       animationId = requestAnimationFrame(updateTrail);
     };
@@ -66,7 +66,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationId);
     };
-  }, [position, isMobile]);
+  }, [isMobile]);
 
   if (isMobile || !isVisible) return null;
 

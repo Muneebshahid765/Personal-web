@@ -45,7 +45,7 @@ export default function Contact({ isDarkMode }: ContactProps) {
     setErrorMessage('');
     
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://muneebcodes.tech/app/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

@@ -34,7 +34,7 @@ export default function Services({ isDarkMode }: ServicesProps) {
   const { data: services = [] } = useQuery<ServiceItem[]>({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch('/api/services');
+      const res = await fetch('https://muneebcodes.tech/app/api/services');
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }

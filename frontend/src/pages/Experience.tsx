@@ -13,7 +13,7 @@ export default function Experience({ isDarkMode }: ExperienceProps) {
   const { data: experiences = [] } = useQuery<ExperienceItem[]>({
     queryKey: ['experiences'],
     queryFn: async () => {
-      const res = await fetch('/api/experiences');
+      const res = await fetch('https://muneebcodes.tech/app/api/experiences');
       if (!res.ok) throw new Error('Network error');
       return res.json();
     }
